@@ -138,7 +138,7 @@
         <item>0</item>
     </integer-array>
 
-    <integer name="config_buttonBrightnessSettingDefault">0</integer>
+    <!-- <add-resource type="integer" name="config_buttonBrightnessSettingDefault">0</add-resource> -->
 
     <integer-array name="config_longPressVibePattern">
         <item>0</item>
@@ -222,7 +222,7 @@
     <bool name="config_animateScreenLights">false</bool> 
 
     <!-- We dont have different firmware for wifi modes, prevent reloading it -->
-    <bool name="config_wifiApFirmwareReload">false</bool>
+    <add-resource type="bool" name="config_wifiApFirmwareReload">false</add-resource>
 
     <!-- When true use the linux /dev/input/event subsystem to detect the switch changes
         on the headphone/microphone jack. When false use the older uevent framework. -->
