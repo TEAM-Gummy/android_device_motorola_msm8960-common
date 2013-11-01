@@ -107,6 +107,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/Gummy/prebuilt/common/bootanimation/480.zip:system/media/480.zip
 
+# Alternate optional key maps
+PRODUCT_PACKAGES += \
+    AsantiKeypad
+
 # Misc
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.usb.mtp=0x2e32 \
