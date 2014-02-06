@@ -12,10 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH := device/motorola/msm8960-common
+$(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+
+LOCAL_PATH := device/motorola/moto_msm8960
 
 ## overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+
+PRODUCT_LOCALES := en_US
+PRODUCT_LOCALES += hdpi xhdpi
+PRODUCT_AAPT_CONFIG := normal hdpi xhdpi
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -30,6 +38,7 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8960 \
     lights.MSM8960 \
     memtrack.msm8960 \
+    nfc.msm8960 \
     power.msm8960
 
 # GPS
@@ -45,7 +54,8 @@ PRODUCT_PACKAGES += \
 
 # Misc
 PRODUCT_PACKAGES += \
-    DevicePerformanceSettingsHelper
+    DevicePerformanceSettingsHelper \
+    sqlite3
 
 # Symlinks
 PRODUCT_PACKAGES += \
@@ -87,14 +97,22 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/config/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x
 
 # Media config
-ifeq ($(TARGET_USES_MOTOROLA_MSM8960_COMMON_MEDIA_PROFILES),true)
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/config/media_profiles.xml:system/etc/media_profiles.xml
-endif
+    $(LOCAL_PATH)/config/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/config/media_profiles_xt90x.xml:system/etc/media_profiles_xt90x.xml
 
 # Media codecs
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/config/media_codecs.xml:system/etc/media_codecs.xml
+
+# XT90x recovery
+PRODUCT_COPY_FILES += \
+    device/motorola/qcom-common/idc/atmxt-i2c.idc:recovery/root/vendor/firmware/atmxt-i2c.idc \
+    vendor/motorola/vanquish/proprietary/etc/firmware/atmxt-r2.tdat:recovery/root/vendor/firmware/atmxt-r2.tdat
+
+# Include 960x540 boot animation in the zip
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/bootanimation/540.zip:system/media/540.zip
 
 # Misc
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -107,6 +125,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Opengles version 2
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
+
+# LTE, CDMA, GSM/WCDMA
+PRODUCT_PROPERTY_OVERRIDES += \
+	telephony.lteOnCdmaDevice=1 \
+	persist.radio.dfr_mode_set=1 \
+	persist.radio.eons.enabled= true \
+	ro.telephony.default_network=10 \
+	persist.radio.mode_pref_nv10=1 \
+	persist.radio.no_wait_for_card=1 \
+	persist.radio.call_type=1 \
+	persist.radio.apm_sim_not_pwdn=1 \
+	persist.timed.enable=true
 
 # Radio and Telephony
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -123,3 +153,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=30
 
 $(call inherit-product, device/motorola/qcom-common/qcom-common.mk)
+$(call inherit-product, device/motorola/qcom-common/idc/idc.mk)
+$(call inherit-product, device/motorola/qcom-common/keychars/keychars.mk)
+$(call inherit-product, device/motorola/qcom-common/keylayout/keylayout.mk)
+$(call inherit-product, device/motorola/qcom-common/modules/nfc/nfc.mk)
+$(call inherit-product, vendor/motorola/vanquish/vanquish-vendor.mk)
