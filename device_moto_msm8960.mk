@@ -112,7 +112,7 @@ PRODUCT_COPY_FILES += \
 
 # Include 960x540 boot animation in the zip
 PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/bootanimation/540.zip:system/media/540.zip
+    vendor/Gummy/prebuilt/common/bootanimation/480.zip:system/media/480.zip
 
 # Misc
 PRODUCT_PROPERTY_OVERRIDES += \
