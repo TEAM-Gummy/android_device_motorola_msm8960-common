@@ -108,7 +108,7 @@ PRODUCT_COPY_FILES += \
 # XT90x recovery
 PRODUCT_COPY_FILES += \
     device/motorola/qcom-common/idc/atmxt-i2c.idc:recovery/root/vendor/firmware/atmxt-i2c.idc \
-    vendor/motorola/vanquish/proprietary/etc/firmware/atmxt-r2.tdat:recovery/root/vendor/firmware/atmxt-r2.tdat
+    vendor/motorola/moto_msm8960/proprietary/etc/firmware/atmxt-r2.tdat:recovery/root/vendor/firmware/atmxt-r2.tdat
 
 # Include 960x540 boot animation in the zip
 PRODUCT_COPY_FILES += \
@@ -157,4 +157,4 @@ $(call inherit-product, device/motorola/qcom-common/idc/idc.mk)
 $(call inherit-product, device/motorola/qcom-common/keychars/keychars.mk)
 $(call inherit-product, device/motorola/qcom-common/keylayout/keylayout.mk)
 $(call inherit-product, device/motorola/qcom-common/modules/nfc/nfc.mk)
-$(call inherit-product, vendor/motorola/vanquish/vanquish-vendor.mk)
+$(call inherit-product, vendor/motorola/moto_msm8960/moto_msm8960-vendor.mk)
